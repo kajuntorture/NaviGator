@@ -139,7 +139,9 @@ export default function LiveScreen() {
       longitudeDelta: 2.5,
     };
 
-    const coordinates = locationState
+    const coordinates = trackPoints.length
+      ? trackPoints
+      : locationState
       ? [{ latitude: locationState.latitude, longitude: locationState.longitude }]
       : [];
 
