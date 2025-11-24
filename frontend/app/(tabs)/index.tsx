@@ -8,6 +8,7 @@ import {
   Platform,
 } from "react-native";
 import * as Location from "expo-location";
+import MapView, { Marker, Polyline, Region } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface LiveLocationState {
