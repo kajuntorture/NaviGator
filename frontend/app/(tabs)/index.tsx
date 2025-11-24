@@ -76,6 +76,8 @@ export default function LiveScreen() {
     setTracking(true);
     setError(null);
 
+    setTrackPoints([]);
+
     const subscription = await Location.watchPositionAsync(
       {
         accuracy: Location.Accuracy.Highest,
@@ -95,6 +97,11 @@ export default function LiveScreen() {
           latitude,
           longitude,
         });
+
+        setTrackPoints((prev) => [
+          ...prev,
+          { latitude, longitude },
+        ]);
       }
     );
 
