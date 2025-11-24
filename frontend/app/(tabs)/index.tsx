@@ -89,6 +89,8 @@ export default function LiveScreen() {
           coordsText: `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`,
           speedKnots: knots,
           heading: typeof heading === "number" && heading >= 0 ? heading : null,
+          latitude,
+          longitude,
         });
       }
     );
