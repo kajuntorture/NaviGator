@@ -240,7 +240,16 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: "flex-start",
+  },
+  mapContainer: {
+    flex: 2,
+    borderRadius: 12,
+    overflow: "hidden",
+    backgroundColor: "#000",
+  },
+  instrumentPanel: {
+    flex: 1,
+    paddingTop: 12,
   },
   centeredBox: {
     flex: 1,
