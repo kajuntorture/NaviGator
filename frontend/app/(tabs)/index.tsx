@@ -27,6 +27,9 @@ export default function LiveScreen() {
   const [locationState, setLocationState] = useState<LiveLocationState | null>(
     null
   );
+  const [trackPoints, setTrackPoints] = useState<
+    { latitude: number; longitude: number }[]
+  >([]);
 
   const [locationSubscription, setLocationSubscription] =
     useState<Location.LocationSubscription | null>(null);
