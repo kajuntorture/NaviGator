@@ -117,10 +117,24 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     backgroundColor: "#0f9d58",
     alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 8,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  secondaryButton: {
+    backgroundColor: "#3c4043",
   },
   buttonText: {
     color: "#ffffff",
     fontSize: 15,
     fontWeight: "600",
+  },
+  statusText: {
+    marginTop: 4,
+    fontSize: 12,
+    color: "#9aa0a6",
   },
 });
