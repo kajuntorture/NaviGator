@@ -15,6 +15,8 @@ interface LiveLocationState {
   coordsText: string;
   speedKnots: number | null;
   heading: number | null;
+  latitude: number;
+  longitude: number;
 }
 
 export default function LiveScreen() {
