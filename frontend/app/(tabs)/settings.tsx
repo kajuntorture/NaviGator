@@ -1,8 +1,48 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LOUISIANA_REGION, downloadRegionTiles, clearTileCache, DownloadProgress } from "../../src/maps/offlineTiles";
 
 export default function SettingsScreen() {
+  const [downloading, setDownloading] = useState(false);
+  const [progress, setProgress] = useState<DownloadProgress | null>(null);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
+  const handleDownload = async () => {
+    if (downloading) return;
+    setStatusMessage(null);
+    setDownloading(true);
+    setProgress(null);
+    try {
+      await downloadRegionTiles(LOUISIANA_REGION, (p) => {
+        setProgress(p);
+      });
+      setStatusMessage("Louisiana base map downloaded for offline use.");
+    } catch (e) {
+      console.error(e);
+      setStatusMessage("Failed to download tiles. Please try again when online.");
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const handleClear = async () => {
+    try {
+      await clearTileCache();
+      setStatusMessage("Offline tile cache cleared.");
+      setProgress(null);
+    } catch (e) {
+      console.error(e);
+      setStatusMessage("Failed to clear cache.");
+    }
+  };
+
+  const progressText =
+    progress && progress.total > 0
+      ? `${Math.round((progress.downloaded / progress.total) * 100)}% ("
+        + `${progress.downloaded}/${progress.total} tiles)`
+      : null;
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Settings & Charts</Text>
@@ -12,9 +52,27 @@ export default function SettingsScreen() {
           Download free base maps for Louisiana so you can keep navigating even
           when you lose signal.
         </Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Download Louisiana base map</Text>
+        <TouchableOpacity
+          style={[styles.button, downloading && styles.buttonDisabled]}
+          onPress={handleDownload}
+          disabled={downloading}
+        >
+          {downloading ? (
+            <>
+              <ActivityIndicator color="#ffffff" style={{ marginRight: 8 }} />
+              <Text style={styles.buttonText}>Downloading tiles…</Text>
+            </>
+          ) : (
+            <Text style={styles.buttonText}>Download Louisiana base map</Text>
+          )}
         </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={handleClear}>
+          <Text style={styles.buttonText}>Clear offline cache</Text>
+        </TouchableOpacity>
+        {progressText && (
+          <Text style={styles.statusText}>Progress: {progressText}</Text>
+        )}
+        {statusMessage && <Text style={styles.statusText}>{statusMessage}</Text>}
       </View>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Tracking</Text>
