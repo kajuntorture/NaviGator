@@ -122,45 +122,83 @@ export default function LiveScreen() {
       );
     }
 
+    const initialRegion: Region = {
+      latitude: locationState?.latitude ?? 29.5, // Louisiana approx center
+      longitude: locationState?.longitude ?? -91.5,
+      latitudeDelta: 2.5,
+      longitudeDelta: 2.5,
+    };
+
+    const coordinates = locationState
+      ? [{ latitude: locationState.latitude, longitude: locationState.longitude }]
+      : [];
+
     return (
       <View style={styles.content}>
-        <View style={styles.statsRow}>
-          <View style={styles.statCard}>
-            <Text style={styles.statLabel}>Speed</Text>
-            <Text style={styles.statValue}>
-              {locationState?.speedKnots != null
-                ? `${locationState.speedKnots.toFixed(1)} kn`
-                : "--"}
+        <View style={styles.mapContainer}>
+          <MapView
+            style={StyleSheet.absoluteFill}
+            initialRegion={initialRegion}
+            showsUserLocation
+            showsCompass
+            showsMyLocationButton
+            mapType="standard"
+          >
+            {coordinates.length > 0 && (
+              <Marker
+                coordinate={coordinates[0]}
+                title="Current position"
+              />
+            )}
+            {coordinates.length > 0 && (
+              <Polyline
+                coordinates={coordinates}
+                strokeColor="#0f9d58"
+                strokeWidth={3}
+              />
+            )}
+          </MapView>
+        </View>
+        <View style={styles.instrumentPanel}>
+          <View style={styles.statsRow}>
+            <View style={styles.statCard}>
+              <Text style={styles.statLabel}>Speed</Text>
+              <Text style={styles.statValue}>
+                {locationState?.speedKnots != null
+                  ? `${locationState.speedKnots.toFixed(1)} kn`
+                  : "--"}
+              </Text>
+            </View>
+            <View style={styles.statCard}>
+              <Text style={styles.statLabel}>Heading</Text>
+              <Text style={styles.statValue}>
+                {locationState?.heading != null
+                  ? `${Math.round(locationState.heading)}°`
+                  : "--"}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.coordsBox}>
+            <Text style={styles.coordsLabel}>Position (lat, lon)</Text>
+            <Text style={styles.coordsValue}>
+              {locationState?.coordsText ?? "Waiting for GPS fix..."}
             </Text>
           </View>
-          <View style={styles.statCard}>
-            <Text style={styles.statLabel}>Heading</Text>
-            <Text style={styles.statValue}>
-              {locationState?.heading != null
-                ? `${Math.round(locationState.heading)}°`
-                : "--"}
+          <TouchableOpacity
+            style={[styles.button, tracking ? styles.buttonStop : styles.buttonStart]}
+            onPress={tracking ? stopTracking : startTracking}
+          >
+            <Text style={styles.buttonText}>
+              {tracking ? "Stop Tracking" : "Start Tracking"}
             </Text>
-          </View>
+          </TouchableOpacity>
+          {Platform.OS === "android" && (
+            <Text style={styles.helperText}>
+              For best accuracy, keep GPS on and stay with a clear view of the
+              sky.
+            </Text>
+          )}
         </View>
-        <View style={styles.coordsBox}>
-          <Text style={styles.coordsLabel}>Position (lat, lon)</Text>
-          <Text style={styles.coordsValue}>
-            {locationState?.coordsText ?? "Waiting for GPS fix..."}
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={[styles.button, tracking ? styles.buttonStop : styles.buttonStart]}
-          onPress={tracking ? stopTracking : startTracking}
-        >
-          <Text style={styles.buttonText}>
-            {tracking ? "Stop Tracking" : "Start Tracking"}
-          </Text>
-        </TouchableOpacity>
-        {Platform.OS === "android" && (
-          <Text style={styles.helperText}>
-            For best accuracy, keep GPS on and stay with a clear view of the sky.
-          </Text>
-        )}
       </View>
     );
   };
