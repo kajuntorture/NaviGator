@@ -323,11 +323,12 @@ const styles = StyleSheet.create({
     marginRight: 12,
     borderWidth: 1,
     borderColor: "#6a8b4e",
+    overflow: "hidden",
   },
-  logoText: {
-    color: "#f5f7f2",
-    fontWeight: "700",
-    fontSize: 16,
+  logoImage: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   headerTextBlock: {
     flex: 1,
