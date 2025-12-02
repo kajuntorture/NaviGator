@@ -226,12 +226,27 @@ export default function LiveScreen() {
             showsCompass
             showsMyLocationButton
             mapType="standard"
-            onLongPress={(event) => {
+            onLongPress={async (event) => {
               const { latitude, longitude } = event.nativeEvent.coordinate;
-              Alert.alert(
-                "Waypoint created",
-                `Lat ${latitude.toFixed(5)}, Lon ${longitude.toFixed(5)}`
-              );
+              const id = `${Date.now()}`;
+              const wp: Waypoint = {
+                id,
+                name: `WP ${latitude.toFixed(3)}, ${longitude.toFixed(3)}`,
+                latitude,
+                longitude,
+                createdAt: Date.now(),
+              };
+              try {
+                await saveWaypoint(wp);
+                setWaypoints((prev) => [...prev, wp]);
+                Alert.alert(
+                  "Waypoint created",
+                  `Lat ${latitude.toFixed(5)}, Lon ${longitude.toFixed(5)}`
+                );
+              } catch (e) {
+                console.error("Failed to save waypoint", e);
+                Alert.alert("Error", "Could not save waypoint.");
+              }
             }}
           >
             {coordinates.length > 0 && (
