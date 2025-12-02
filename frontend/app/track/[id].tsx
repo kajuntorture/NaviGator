@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, Platform } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Platform } from "react-native";
 import MapView, { Polyline, Marker, Region } from "react-native-maps";
 import { loadTrackById, Track } from "../../src/storage/tracks";
 
