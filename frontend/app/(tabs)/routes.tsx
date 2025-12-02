@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: "600",
-    color: "#ffffff",
+    fontWeight: "700",
+    color: "#f5f7f2",
     marginBottom: 12,
   },
   placeholderBox: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   placeholderText: {
-    color: "#9aa0a6",
+    color: "#a7b89a",
     fontSize: 14,
     textAlign: "center",
   },
