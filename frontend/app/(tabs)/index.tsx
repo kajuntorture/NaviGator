@@ -219,6 +219,12 @@ export default function LiveScreen() {
             showsMyLocationButton
             mapType="standard"
           >
+            {/* NOAA ENC / NCDS overlay (ENCOnline WMS) */}
+            <WMSTile
+              urlTemplate="https://gis.charttools.noaa.gov/arcgis/services/MCS/ENCOnline/MapServer/WMSServer?service=WMS&request=GetMap&version=1.3.0&layers=ENCOnline&styles=default&format=image/png&transparent=true&crs=EPSG:3857&width=256&height=256&bbox={minX},{minY},{maxX},{maxY}"
+              zIndex={10}
+              opacity={0.9}
+            />
             {coordinates.length > 0 && (
               <Marker
                 coordinate={coordinates[0]}
