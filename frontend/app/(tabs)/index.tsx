@@ -117,11 +117,64 @@ export default function LiveScreen() {
     setLocationSubscription(subscription);
   };
 
-  const stopTracking = () => {
+  const stopTracking = async () => {
     setTracking(false);
     if (locationSubscription) {
       locationSubscription.remove();
       setLocationSubscription(null);
+    }
+
+    if (!trackStartedAt || !locationState || trackPoints.length < 2) {
+      return;
+    }
+
+    const endedAt = Date.now();
+
+    // Compute distance using simple haversine formula
+    const toRad = (deg: number) => (deg * Math.PI) / 180;
+    let distanceMeters = 0;
+    for (let i = 1; i < trackPoints.length; i++) {
+      const prev = trackPoints[i - 1];
+      const curr = trackPoints[i];
+      const R = 6371000; // meters
+      const dLat = toRad(curr.latitude - prev.latitude);
+      const dLon = toRad(curr.longitude - prev.longitude);
+      const lat1 = toRad(prev.latitude);
+      const lat2 = toRad(curr.latitude);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1) * Math.cos(lat2) *
+          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      distanceMeters += R * c;
+    }
+
+    const durationSeconds = Math.max(1, Math.round((endedAt - trackStartedAt) / 1000));
+    const avgSpeedKnots = distanceMeters / durationSeconds / 0.514444; // m/s to kn
+
+    const trackPointsFull: TrackPoint[] = trackPoints.map((p) => ({
+      latitude: p.latitude,
+      longitude: p.longitude,
+      timestamp: endedAt, // simplified; could store each sample time
+      speedKnots: null,
+      heading: null,
+    }));
+
+    const track: Track = {
+      id: `${trackStartedAt}`,
+      name: `Track ${new Date(trackStartedAt).toLocaleDateString()}`,
+      startedAt: trackStartedAt,
+      endedAt,
+      distanceMeters,
+      avgSpeedKnots,
+      maxSpeedKnots,
+      points: trackPointsFull,
+    };
+
+    try {
+      await saveTrack(track);
+    } catch (e) {
+      console.error("Failed to save track", e);
     }
   };
 
