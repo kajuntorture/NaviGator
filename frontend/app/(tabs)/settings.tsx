@@ -93,38 +93,46 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: "600",
-    color: "#ffffff",
+    fontWeight: "700",
+    color: "#f5f7f2",
     marginBottom: 16,
   },
   section: {
     marginBottom: 24,
+    padding: 12,
+    borderRadius: 12,
+    backgroundColor: "#131a11",
+    borderWidth: 1,
+    borderColor: "#344726",
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#e8eaed",
+    color: "#f5f7f2",
     marginBottom: 4,
   },
   sectionText: {
     fontSize: 14,
-    color: "#9aa0a6",
+    color: "#a7b89a",
     marginBottom: 12,
   },
   button: {
     paddingVertical: 14,
     borderRadius: 999,
-    backgroundColor: "#0f9d58",
+    backgroundColor: "#3e6b29",
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 8,
+    borderWidth: 1,
+    borderColor: "#6a8b4e",
   },
   buttonDisabled: {
     opacity: 0.6,
   },
   secondaryButton: {
     backgroundColor: "#3c4043",
+    borderColor: "#5f6b5a",
   },
   buttonText: {
     color: "#ffffff",
@@ -134,6 +142,6 @@ const styles = StyleSheet.create({
   statusText: {
     marginTop: 4,
     fontSize: 12,
-    color: "#9aa0a6",
+    color: "#c0cfb2",
   },
 });
