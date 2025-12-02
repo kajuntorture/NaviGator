@@ -219,8 +219,12 @@ export default function LiveScreen() {
             showsCompass
             showsMyLocationButton
             mapType="standard"
-            onLongPress={() => {
-              // Waypoints to be implemented next
+            onLongPress={(event) => {
+              const { latitude, longitude } = event.nativeEvent.coordinate;
+              Alert.alert(
+                "Waypoint created",
+                `Lat ${latitude.toFixed(5)}, Lon ${longitude.toFixed(5)}`
+              );
             }}
           >
             {coordinates.length > 0 && (
