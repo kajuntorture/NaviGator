@@ -10,11 +10,11 @@ import {
 import * as Location from "expo-location";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-interface LiveLocationState {
+type LiveLocationState = {
   coordsText: string;
   speedKnots: number | null;
   heading: number | null;
-}
+};
 
 export default function LiveWebScreen() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
