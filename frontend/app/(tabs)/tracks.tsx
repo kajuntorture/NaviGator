@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: "600",
-    color: "#ffffff",
+    fontWeight: "700",
+    color: "#f5f7f2",
     marginBottom: 12,
   },
   placeholderBox: {
@@ -107,8 +107,44 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   placeholderText: {
-    color: "#9aa0a6",
+    color: "#a7b89a",
     fontSize: 14,
     textAlign: "center",
+  },
+  trackCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 14,
+    borderRadius: 12,
+    backgroundColor: "#131a11",
+    borderWidth: 1,
+    borderColor: "#344726",
+    marginBottom: 10,
+  },
+  trackTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#f5f7f2",
+  },
+  trackSubtitle: {
+    fontSize: 12,
+    color: "#a7b89a",
+  },
+  trackMeta: {
+    marginTop: 4,
+    fontSize: 12,
+    color: "#c0cfb2",
+  },
+  deleteButton: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: "#8c2c23",
+    marginLeft: 8,
+  },
+  deleteText: {
+    fontSize: 12,
+    color: "#ffb4a2",
   },
 });
