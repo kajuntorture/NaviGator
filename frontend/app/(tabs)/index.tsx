@@ -66,6 +66,11 @@ export default function LiveScreen() {
   useEffect(() => {
     requestPermissions();
 
+    // Load existing waypoints on mount
+    loadWaypoints()
+      .then(setWaypoints)
+      .catch((e) => console.error("Failed to load waypoints", e));
+
     return () => {
       if (locationSubscription) {
         locationSubscription.remove();
