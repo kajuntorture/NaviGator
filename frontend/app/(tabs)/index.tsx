@@ -305,17 +305,38 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   header: {
-    paddingVertical: 16,
+    paddingVertical: 12,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerLogoCircle: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: "#1b3b24", // deep camo green
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+    borderWidth: 1,
+    borderColor: "#6a8b4e",
+  },
+  logoText: {
+    color: "#f5f7f2",
+    fontWeight: "700",
+    fontSize: 16,
+  },
+  headerTextBlock: {
+    flex: 1,
   },
   headerTitle: {
     fontSize: 22,
-    fontWeight: "600",
-    color: "#ffffff",
+    fontWeight: "700",
+    color: "#f5f7f2",
   },
   headerSubtitle: {
-    marginTop: 4,
+    marginTop: 2,
     fontSize: 13,
-    color: "#9aa0a6",
+    color: "#c0cfb2",
   },
   content: {
     flex: 1,
