@@ -39,8 +39,7 @@ export default function SettingsScreen() {
 
   const progressText =
     progress && progress.total > 0
-      ? `${Math.round((progress.downloaded / progress.total) * 100)}% ("
-        + `${progress.downloaded}/${progress.total} tiles)`
+      ? `${Math.round((progress.downloaded / progress.total) * 100)}% (${progress.downloaded}/${progress.total} tiles)`
       : null;
 
   return (
