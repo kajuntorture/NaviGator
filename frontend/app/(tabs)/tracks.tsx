@@ -18,11 +18,9 @@ export default function TracksScreen() {
   };
 
   useEffect(() => {
-    const unsubscribe = router.addListener("focus", () => {
-      refresh();
-    });
+    // Load tracks when the screen mounts. If you navigate away and back,
+    // the component remounts and refresh() is called again.
     refresh();
-    return unsubscribe;
   }, []);
 
   const handleOpen = (id: string) => {
