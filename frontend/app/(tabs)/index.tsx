@@ -34,6 +34,7 @@ export default function LiveScreen() {
   const [trackPoints, setTrackPoints] = useState<
     { latitude: number; longitude: number }[]
   >([]);
+  const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
 
   const [locationSubscription, setLocationSubscription] =
     useState<Location.LocationSubscription | null>(null);
