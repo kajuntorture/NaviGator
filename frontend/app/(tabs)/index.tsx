@@ -80,6 +80,8 @@ export default function LiveScreen() {
     setError(null);
 
     setTrackPoints([]);
+    setTrackStartedAt(Date.now());
+    setMaxSpeedKnots(null);
 
     const subscription = await Location.watchPositionAsync(
       {
