@@ -13,6 +13,7 @@ import * as Location from "expo-location";
 import MapView, { Marker, Polyline, Region } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { saveTrack, TrackPoint, Track } from "../../src/storage/tracks";
+import { Waypoint, saveWaypoint, loadWaypoints } from "../../src/storage/waypoints";
 
 type LiveLocationState = {
   coordsText: string;
