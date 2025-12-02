@@ -282,7 +282,10 @@ export default function LiveScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerLogoCircle}>
-          <Text style={styles.logoText}>NG</Text>
+          <Image
+            source={require("../../assets/images/app-image.png")}
+            style={styles.logoImage}
+          />
         </View>
         <View style={styles.headerTextBlock}>
           <Text style={styles.headerTitle}>NaviGator</Text>
