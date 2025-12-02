@@ -95,6 +95,10 @@ export default function LiveScreen() {
           ? speed * 1.94384
           : null;
 
+        if (knots != null) {
+          setMaxSpeedKnots((prev) => (prev == null ? knots : Math.max(prev, knots)));
+        }
+
         setLocationState({
           coordsText: `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`,
           speedKnots: knots,
