@@ -34,6 +34,8 @@ export default function LiveScreen() {
 
   const [locationSubscription, setLocationSubscription] =
     useState<Location.LocationSubscription | null>(null);
+  const [trackStartedAt, setTrackStartedAt] = useState<number | null>(null);
+  const [maxSpeedKnots, setMaxSpeedKnots] = useState<number | null>(null);
 
   const requestPermissions = async () => {
     setRequesting(true);
