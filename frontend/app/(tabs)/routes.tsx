@@ -1,16 +1,65 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FlashList, ListRenderItem } from "@shopify/flash-list";
+import { loadWaypoints, Waypoint, deleteWaypoint } from "../../src/storage/waypoints";
 
 export default function RoutesScreen() {
+  const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const refresh = async () => {
+    setLoading(true);
+    const data = await loadWaypoints();
+    setWaypoints(data.sort((a, b) => b.createdAt - a.createdAt));
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    refresh();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    await deleteWaypoint(id);
+    refresh();
+  };
+
+  const renderItem: ListRenderItem<Waypoint> = ({ item }) => (
+    <View style={styles.wpCard}>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.wpName}>{item.name}</Text>
+        <Text style={styles.wpCoords}>
+          {item.latitude.toFixed(5)}, {item.longitude.toFixed(5)}
+        </Text>
+        <Text style={styles.wpTime}>{new Date(item.createdAt).toLocaleString()}</Text>
+      </View>
+      <TouchableOpacity style={styles.wpDelete} onPress={() => handleDelete(item.id)}>
+        <Text style={styles.wpDeleteText}>Delete</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Routes & Waypoints</Text>
-      <View style={styles.placeholderBox}>
-        <Text style={styles.placeholderText}>
-          You will be able to create and manage waypoints and routes here.
-        </Text>
-      </View>
+      {loading ? (
+        <View style={styles.placeholderBox}>
+          <ActivityIndicator color="#0f9d58" size="large" />
+        </View>
+      ) : waypoints.length === 0 ? (
+        <View style={styles.placeholderBox}>
+          <Text style={styles.placeholderText}>
+            Long-press on the chart on the Live tab to create waypoints.
+          </Text>
+        </View>
+      ) : (
+        <FlashList
+          data={waypoints}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          estimatedItemSize={72}
+        />
+      )}
     </SafeAreaView>
   );
 }
