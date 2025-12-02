@@ -280,8 +280,13 @@ export default function LiveScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Live Navigation</Text>
-        <Text style={styles.headerSubtitle}>Louisiana waters - GPS instruments</Text>
+        <View style={styles.headerLogoCircle}>
+          <Text style={styles.logoText}>NG</Text>
+        </View>
+        <View style={styles.headerTextBlock}>
+          <Text style={styles.headerTitle}>NaviGator</Text>
+          <Text style={styles.headerSubtitle}>Louisiana coastal navigator</Text>
+        </View>
       </View>
       {error && hasPermission && (
         <View style={styles.errorBanner}>
