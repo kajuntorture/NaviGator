@@ -12,13 +12,13 @@ import MapView, { Marker, Polyline, Region } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { saveTrack, TrackPoint, Track } from "../../src/storage/tracks";
 
-interface LiveLocationState {
+type LiveLocationState = {
   coordsText: string;
   speedKnots: number | null;
   heading: number | null;
   latitude: number;
   longitude: number;
-}
+};
 
 export default function LiveScreen() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
