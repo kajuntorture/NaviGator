@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ActivityIndicator, Platform } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+// Native-only map view. Web has its own .web.tsx implementation.
 import MapView, { Polyline, Marker, Region } from "react-native-maps";
 import { loadTrackById, Track } from "../../src/storage/tracks";
 
