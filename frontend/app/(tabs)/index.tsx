@@ -255,6 +255,15 @@ export default function LiveScreen() {
                 title="Current position"
               />
             )}
+            {waypoints.map((wp) => (
+              <Marker
+                key={wp.id}
+                coordinate={{ latitude: wp.latitude, longitude: wp.longitude }}
+                title={wp.name}
+                description={`${new Date(wp.createdAt).toLocaleString()}`}
+                pinColor="#f4b400"
+              />
+            ))}
             {coordinates.length > 0 && (
               <Polyline
                 coordinates={coordinates}
