@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Platform,
+  Image,
 } from "react-native";
 import * as Location from "expo-location";
 import MapView, { Marker, Polyline, Region } from "react-native-maps";
