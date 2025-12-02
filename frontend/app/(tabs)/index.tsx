@@ -218,6 +218,9 @@ export default function LiveScreen() {
             showsCompass
             showsMyLocationButton
             mapType="standard"
+            onLongPress={() => {
+              // Waypoints to be implemented next
+            }}
           >
             {coordinates.length > 0 && (
               <Marker
