@@ -34,7 +34,7 @@ export default function TracksScreen() {
     refresh();
   };
 
-  const renderItem = ({ item }: { item: TrackSummary }) => {
+  const renderItem: ListRenderItem<TrackSummary> = ({ item }) => {
     const date = new Date(item.startedAt);
     const label = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], {
       hour: "2-digit",
