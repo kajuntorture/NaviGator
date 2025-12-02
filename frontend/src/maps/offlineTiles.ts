@@ -1,4 +1,5 @@
-import * as FileSystem from "expo-file-system";
+// Using legacy API to avoid runtime deprecation errors on device.
+import * as FileSystem from "expo-file-system/legacy";
 
 const TILE_SERVER = "https://tile.openstreetmap.org"; // free base map tiles
 
