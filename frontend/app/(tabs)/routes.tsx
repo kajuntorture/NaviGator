@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from "rea
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import { loadWaypoints, Waypoint, deleteWaypoint } from "../../src/storage/waypoints";
+import { EncCell, fetchEncCatalog } from "../../src/api/encCatalog";
 
 export default function RoutesScreen() {
   const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
