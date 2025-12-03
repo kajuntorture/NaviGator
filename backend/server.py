@@ -51,6 +51,23 @@ class StatusCheckCreate(BaseModel):
 async def root():
     return {"message": "Hello World"}
 
+# Preload ENC catalog from JSON (derived from LA_ENCProdCat.xml offline)
+CATALOG_PATH = ROOT_DIR / "la_enc_catalog.json"
+if CATALOG_PATH.exists():
+    with CATALOG_PATH.open("r", encoding="utf-8") as f:
+        raw_catalog = json.load(f)
+    ENC_CELLS = [
+        EncCell(**cell) for cell in raw_catalog.get("cells", [])
+    ]
+else:
+    ENC_CELLS = []
+
+
+@api_router.get("/enc/catalog", response_model=List[EncCell])
+async def get_enc_catalog():
+    return ENC_CELLS
+
+
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     status_dict = input.dict()
