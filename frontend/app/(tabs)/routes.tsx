@@ -12,8 +12,12 @@ export default function RoutesScreen() {
 
   const refresh = async () => {
     setLoading(true);
-    const data = await loadWaypoints();
-    setWaypoints(data.sort((a, b) => b.createdAt - a.createdAt));
+    const [wpData, encData] = await Promise.all([
+      loadWaypoints(),
+      fetchEncCatalog().catch(() => []),
+    ]);
+    setWaypoints(wpData.sort((a, b) => b.createdAt - a.createdAt));
+    setEncCells(encData);
     setLoading(false);
   };
 
