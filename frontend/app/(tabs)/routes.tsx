@@ -125,4 +125,37 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
   },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#f5f7f2",
+    marginBottom: 4,
+  },
+  encBox: {
+    marginBottom: 12,
+    padding: 10,
+    borderRadius: 12,
+    backgroundColor: "#131a11",
+    borderWidth: 1,
+    borderColor: "#344726",
+  },
+  encRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 6,
+  },
+  encName: {
+    fontSize: 14,
+    color: "#f5f7f2",
+    fontWeight: "500",
+  },
+  encMeta: {
+    fontSize: 12,
+    color: "#a7b89a",
+  },
+  encMore: {
+    marginTop: 4,
+    fontSize: 12,
+    color: "#c0cfb2",
+  },
 });
