@@ -52,19 +52,51 @@ export default function RoutesScreen() {
         <View style={styles.placeholderBox}>
           <ActivityIndicator color="#0f9d58" size="large" />
         </View>
-      ) : waypoints.length === 0 ? (
-        <View style={styles.placeholderBox}>
-          <Text style={styles.placeholderText}>
-            Long-press on the chart on the Live tab to create waypoints.
-          </Text>
-        </View>
       ) : (
-        <FlashList
-          data={waypoints}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          estimatedItemSize={72}
-        />
+        <>
+          <Text style={styles.sectionTitle}>ENC Catalog (Louisiana)</Text>
+          {encCells.length === 0 ? (
+            <Text style={styles.placeholderText}>
+              ENC catalog data is not available. This app shows free base maps,
+              but you can use these ENC IDs in OpenCPN or other charting
+              software.
+            </Text>
+          ) : (
+            <View style={styles.encBox}>
+              {encCells.slice(0, 6).map((cell) => (
+                <View key={cell.name} style={styles.encRow}>
+                  <View style={{ flex: 1 }}>
+                    <Text style={styles.encName}>{cell.lname || cell.name}</Text>
+                    <Text style={styles.encMeta}>
+                      ID {cell.name} • Scale 1:{cell.cscale}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+              {encCells.length > 6 && (
+                <Text style={styles.encMore}>
+                  + {encCells.length - 6} more ENC cells in catalog
+                </Text>
+              )}
+            </View>
+          )}
+
+          <Text style={[styles.sectionTitle, { marginTop: 16 }]}>Waypoints</Text>
+          {waypoints.length === 0 ? (
+            <View style={styles.placeholderBox}>
+              <Text style={styles.placeholderText}>
+                Long-press on the chart on the Live tab to create waypoints.
+              </Text>
+            </View>
+          ) : (
+            <FlashList
+              data={waypoints}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+              estimatedItemSize={72}
+            />
+          )}
+        </>
       )}
     </SafeAreaView>
   );
