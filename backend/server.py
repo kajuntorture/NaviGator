@@ -28,6 +28,16 @@ api_router = APIRouter(prefix="/api")
 
 
 # Define Models
+class EncCell(BaseModel):
+    name: str
+    lname: str
+    cscale: int
+    states: List[str]
+    bbox: List[float]
+    zip_url: str
+    status: str
+
+
 class StatusCheck(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
