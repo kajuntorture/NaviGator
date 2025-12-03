@@ -7,6 +7,7 @@ import { EncCell, fetchEncCatalog } from "../../src/api/encCatalog";
 
 export default function RoutesScreen() {
   const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
+  const [encCells, setEncCells] = useState<EncCell[]>([]);
   const [loading, setLoading] = useState(true);
 
   const refresh = async () => {
